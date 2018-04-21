@@ -1,8 +1,8 @@
 <template>
 <div> I am goods</div>
 </template>
-<script>
+<script type="text/ecmascript-6">
 export default {};
 </script>
-<style>
+<style lang="stylus" rel="stylesheet/stylus">
 </style>

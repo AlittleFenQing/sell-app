@@ -5,18 +5,19 @@ import VueRouter from 'vue-router';
 import App from './App';
 import goods from '../src/components/goods/goods';
 Vue.use(VueRouter);
-Vue.config.productionTip = false;
-let app = Vue.extend(App);
-let router = new VueRouter();
-// /* eslint-disable no-new */
-// new Vue({
-//   el: '#app',
-//   components: { App },
-//   template: '<App/>'
-// });
-router.map({
-   '/goods':{
-    component : goods
+var routes = [
+  {
+    path: '/',
+    redirect: '/goods'
   }
-});
-router.start(app, '#app');
+];
+var router = new VueRouter({
+  linkActiveClass: 'active',
+    routes
+  });
+  /eslint-disable no-new/;
+  new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+  });
