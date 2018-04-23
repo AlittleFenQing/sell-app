@@ -4,13 +4,13 @@
     <div class="tab">
       <div class="tab">
         <div class="tab-item">
-          <a v-link="{path:'/goods'}">商品</a>
+          <router-link to="/goods"> <a>商品</a></router-link>
         </div>
         <div class="tab-item">
-          <a v-link="{path:'/ratings'}">评论</a>
+          <router-link to="/ratings"> <a>评论</a></router-link>
         </div>
         <div class="tab-item">
-          <a v-link="{path:'/seller'}">商家</a>
+          <router-link to="/seller"> <a>商家</a></router-link>
         </div>
       </div>
     </div>
@@ -27,14 +27,24 @@ export default {
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
+@import "./common/stylus/mixin.styl";
 .tab{
   display :flex
   width: 100%
   height: 40px
   line-height: 40px
+  border-1px(black)
 }
 .tab-item{
   flex :1
   text-align :center
+}
+.tab-item a{
+  display :block;
+  font-size :14px;
+  color:rga(77,85,93);
+}
+.active a{
+  color:rgb(240,20,20);
 }
 </style>

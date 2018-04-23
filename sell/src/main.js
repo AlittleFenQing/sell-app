@@ -4,20 +4,38 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
 import goods from '../src/components/goods/goods';
+import ratings from '../src/components/ratings/ratings';
+import seller from '../src/components/seller/seller';
 Vue.use(VueRouter);
-var routes = [
-  {
-    path: '/',
-    redirect: '/goods'
-  }
-];
-var router = new VueRouter({
+let router = new VueRouter({
   linkActiveClass: 'active',
-    routes
-  });
-  /eslint-disable no-new/;
-  new Vue({
+  mode: 'history',
+  routes: [{
+      path: '/',
+      component: goods
+    },
+    {
+      path: '/goods',
+      component: goods
+    }, {
+      path: '/ratings',
+      component: ratings
+    }, {
+      path: '/seller',
+      component: seller
+    }, {
+      path: '/goback',
+      redirect: '/'
+    }
+  ]
+});
+Vue.config.productionTip = false;
+/* eslint-disable no-new */
+new Vue({
   el: '#app',
   router,
-  render: h => h(App)
-  });
+  components: {
+    App
+  },
+  template: '<App/>'
+});
