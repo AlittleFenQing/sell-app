@@ -2,11 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
 import App from './App';
 import goods from '../src/components/goods/goods';
 import ratings from '../src/components/ratings/ratings';
 import seller from '../src/components/seller/seller';
 Vue.use(VueRouter);
+Vue.use(VueResource);
 let router = new VueRouter({
   linkActiveClass: 'active',
   mode: 'history',
