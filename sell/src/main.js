@@ -7,6 +7,7 @@ import App from './App';
 import goods from '../src/components/goods/goods';
 import ratings from '../src/components/ratings/ratings';
 import seller from '../src/components/seller/seller';
+import '../src/common/stylus/icon.styl';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 let router = new VueRouter({

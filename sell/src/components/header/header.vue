@@ -17,19 +17,36 @@
            <span class="text">{{seller.supports[0].description}}</span>
          </div>
        </div>
-       <div v-if="seller.supports" class="support-count">
+       <div v-if="seller.supports" class="support-count" @click="showDetail">
          <span class="count">{{seller.supports.length}}个</span>
-         <i class="icon-keyboard_arrow_right">></i>
+         <i class="icon-keyboard_arrow_right"></i>
        </div>
      </div>
-     <div class="bulletin-wrapper">
+     <div class="bulletin-wrapper" @click="showDetail">
        <span class="bulletin-title"></span>
        <span class="bulletin-text">{{seller.bulletin}}</span>
-       <i class="icon-keyboard_arrow_right1">></i>
+       <i class="icon-keyboard_arrow_right right2"></i>
+     </div>
+     <div  class="background">
+       <img :src="seller.avatar" alt="bg-image" width="100%" height="100%">
+     </div>
+     <div class="detail" v-show="detailshow">
+       <div class="detail-wrapper clearfix">
+         <div class="detail-main">
+           <h1 class="name">{{seller.name}}</h1>
+           <div class="star-wrapper">
+             <star :size="48" :score="seller.score"></star>
+           </div>
+         </div>
+       </div>
+       <div class="detail-close">
+         <i class="icon-close"></i>
+       </div>
      </div>
   </div>
 </template>
 <script type="text/exmascript-6">
+import star from '../star/star.vue';
 export default {
   props: {
     seller: {
@@ -38,13 +55,37 @@ export default {
   },
   created () {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+  },
+  data () {
+    return {
+      detailshow: false
+    };
+  },
+  methods: {
+    showDetail () {
+      this.detailshow = true;
+    }
+  },
+  components: {
+    star
   }
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .header{
   color: #ffffff;
-  background-color: #999;
+  position relative;
+  background rgba(7,17,27,0.5);
+  overflow hidden;
+}
+.background {
+  left 0;
+  top 0;
+  width 100%;
+  height 100%;
+  z-index -1
+  position absolute;
+  filter blur(10px);
 }
 .content-wrapper{
    padding:24px 12px 18px 24px;
@@ -81,6 +122,7 @@ export default {
 .icon-keyboard_arrow_right{
   margin-left 2px;
   font-size 10px;
+ line-height 24px;
 }
 .title{
   margin:2px 0 8px 0;
@@ -156,9 +198,57 @@ export default {
  margin 0 4px;
  vertical-align top;
 }
-.icon-keyboard_arrow_right1{
+.right2{
   position absolute;
   font-size 10px;
   right 12px;
 }
+.detail{
+  position fixed;
+  z-index 100;
+  top 0;
+  left 0;
+  width 100%;
+  height 100%;
+  overflow auto;
+  background rgba(7,17,27,0.8);
+}
+.detail-wrapper{
+  min-height 100%;
+  width 100%;
+}
+.detail-main{
+  margin-top 64px;
+  padding-bottom 64px;
+}
+.detail-close{
+  position relative;
+  width 32px;
+  height 32px;
+  margin -60px auto 0px auto;
+  clear both;
+  font-size 32px;
+  }
+  .clearfix{
+  display inline-block;
+}
+.clearfix:after{
+  display block;
+  content '';
+  height 0;
+  line-height 0;
+  clear both;
+  visibility hidden;
+}
+.name{
+  line-height 16px;
+  text-align center;
+  font-size 16px;
+  font-weight 700;
+  }
+  .star-wrapper{
+    margin-top 18px;
+    padding 2px 0;
+    text-align center;
+    }
 </style>
