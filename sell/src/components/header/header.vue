@@ -30,6 +30,7 @@
      <div  class="background">
        <img :src="seller.avatar" alt="bg-image" width="100%" height="100%">
      </div>
+     <transition name="fade">
      <div class="detail" v-show="detailshow">
        <div class="detail-wrapper clearfix">
          <div class="detail-main">
@@ -37,12 +38,48 @@
            <div class="star-wrapper">
              <star :size="48" :score="seller.score"></star>
            </div>
+           <div class="detail-title">
+             <div class="line"></div>
+             <div class="detail-text">优惠信息</div>
+             <div class="line"></div>
+           </div>
+           <ul v-if="seller.supports" class="supports">
+             <li class="support-item item">
+               <span class="support-icon icon" :class="classMap[seller.supports[0].type]"></span>
+               <span class="support-text text">{{seller.supports[0].description}}</span>
+             </li>
+              <li class="support-item item">
+               <span class="support-icon icon" :class="classMap[seller.supports[1].type]"></span>
+               <span class="support-text text">{{seller.supports[1].description}}</span>
+             </li>
+              <li class="support-item item">
+               <span class="support-icon icon" :class="classMap[seller.supports[2].type]"></span>
+               <span class="support-text text">{{seller.supports[2].description}}</span>
+             </li>
+              <li class="support-item item">
+               <span class="support-icon icon" :class="classMap[seller.supports[3].type]"></span>
+               <span class="support-text text">{{seller.supports[3].description}}</span>
+             </li>
+              <li class="support-item item">
+               <span class="support-icon icon" :class="classMap[seller.supports[4].type]"></span>
+               <span class="support-text text">{{seller.supports[4].description}}</span>
+             </li>
+           </ul>
+           <div class="detail-title">
+             <div class="line"></div>
+             <div class="detail-text">商家公告</div>
+             <div class="line"></div>
+           </div>
+           <div class="bulletin">
+             <p class="content">{{seller.bulletin}}</p>
+           </div>
          </div>
        </div>
-       <div class="detail-close">
+       <div class="detail-close" @click="hideDetail">
          <i class="icon-close"></i>
        </div>
      </div>
+     </transition>
   </div>
 </template>
 <script type="text/exmascript-6">
@@ -64,6 +101,9 @@ export default {
   methods: {
     showDetail () {
       this.detailshow = true;
+    },
+    hideDetail () {
+      this.detailshow = false;
     }
   },
   components: {
@@ -204,6 +244,7 @@ export default {
   right 12px;
 }
 .detail{
+  transition all 0.5s;
   position fixed;
   z-index 100;
   top 0;
@@ -212,6 +253,14 @@ export default {
   height 100%;
   overflow auto;
   background rgba(7,17,27,0.8);
+}
+&.fade-transition{
+  opacity 1;
+  background rgba(7,17,27,0.8);
+}
+&.fade-enter, &.fade-leave{
+  opacity 0;
+  background rgba(7,17,27,0);
 }
 .detail-wrapper{
   min-height 100%;
@@ -245,10 +294,76 @@ export default {
   text-align center;
   font-size 16px;
   font-weight 700;
-  }
-  .star-wrapper{
-    margin-top 18px;
-    padding 2px 0;
-    text-align center;
-    }
+}
+.star-wrapper{
+  margin-top 18px;
+  padding 2px 0;
+  text-align center;
+}
+.detail-title{
+  display flex;
+  width 80%;
+  margin 28px auto 24px auto;
+}
+.line{
+  flex 1;
+  position relative;
+  top -6px;
+  border-bottom 1px solid  rgba(255, 255, 255, 0.2);
+}
+.detail-text{
+  text-align center;
+  padding 0 12px;
+  font-size 14px;
+  font-weight 700;
+}
+.supports{
+  width 80%;
+  margin 0 auto;
+}
+.support-item{
+  padding 0px 12px;
+  margin-bottom 12px;
+  font-size 0;
+}
+&:last-child{
+  margin-bottom 0;
+}
+.support-icon{
+  display inline-block;
+  width 16px;
+  height 16px;
+  vertical-align top;
+  margin-right 6px;
+  background-size 16px 16px;
+  background-repeat no-repeat;
+}
+&.decrease{
+  background-image url('./decrease_1@2x.png');
+}
+&.discount{
+   background-image url('./discount_1@2x.png');
+}
+&.guarantee{
+   background-image url('./guarantee_1@2x.png');
+}
+&.invoice{
+   background-image url('./invoice_1@2x.png');
+}
+&.special{
+  background-image url('./special_1@2x.png');
+}
+.supports-text{
+  line-height 16px;
+  font-size 12px;
+}
+.bulletin{
+  width 80%;
+  margin auto;
+}
+.content{
+  padding 0 12px;
+  line-height 24px;
+  font-size 12px;
+}
 </style>
