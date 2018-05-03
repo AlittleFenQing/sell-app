@@ -314,7 +314,7 @@ export default {
 .detail-text{
   text-align center;
   padding 0 12px;
-  font-size 14px;
+  font-size 15px;
   font-weight 700;
 }
 .supports{
