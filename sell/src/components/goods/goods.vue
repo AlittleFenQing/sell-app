@@ -29,18 +29,22 @@
                                     <span class="now">￥{{food.price}}</span>
                                     <span v-show="food.oldPrice" class="old">￥{{food.oldPrice}}</span>
                                 </div>
+                                <div class="cartcontrol-wrapper">
+                                    <cartcontrol :food="food"></cartcontrol>
+                                </div>
                             </div>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <shoppcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shoppcart>
+        <shoppcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shoppcart>
     </div>
 </template>
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll';
 import shoppcart from '../shoppcart/shoppcart';
+import cartcontrol from '../cartcontrol/cartcontrol';
 export default {
     props: {
         seller: {
@@ -72,6 +76,7 @@ export default {
             click: true
         });
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+            click: true,
             probeType: 3
         });
         this.foodsScroll.on('scroll', (pos) => {
@@ -107,10 +112,22 @@ export default {
               }
           }
           return 0;
+      },
+      selectFoods () {
+          let foods = [];
+          this.goods.forEach((good) => {
+              good.foods.forEach((food) => {
+                  if (food.count) {
+                      foods.push(food);
+                  }
+              });
+          });
+          return foods;
       }
   },
   components: {
-      shoppcart
+      shoppcart,
+      cartcontrol
   }
 };
 </script>
@@ -188,7 +205,7 @@ export default {
             border-bottom none;
             padding-bottom 0px;
     .icon
-        flex 0 0 80px
+        flex 0 0 60px
         margin-right 10px;
     .icon img
         width 65px;
@@ -214,12 +231,9 @@ export default {
         .price
             font-weight 700;
             line-height 24px;
-            .now
-                margin-right 18px;
-                font-size 14px;
-                color rgb(240,20,20);
-            .old
-                text-decoration line-through
-                font-size 10px;
-                color rgb(147,153,159);
+        .cartcontrol-wrapper
+            float right;
+            position relative;
+            right 0px;
+            bottom 5px;
 </style>
