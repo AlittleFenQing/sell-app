@@ -69,3 +69,7 @@
     `']`'<br/> 
  `'}`'<br/> 
 
+## 运行方法：<br/> 
+* npm instaill<br/> 
+* cd sell<br/>  
+* npm run dev
