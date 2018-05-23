@@ -1,2 +1,4 @@
 # sell-app
-take-out-APP
+# # Vue.js 高仿饿了么外卖 App
+    简要描述：
+
